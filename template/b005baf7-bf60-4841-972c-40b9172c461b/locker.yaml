@@ -1,0 +1,113 @@
+id: b005baf7-bf60-4841-972c-40b9172c461b
+headline: Let's build a new environment! Provide either localhost or the ip address for this computer.
+inputs:
+  - key: host
+    charlimit: 16
+    placeholder: localhost
+    title: Host
+    default: localhost
+    value:
+  - key: port
+    charlimit: 5
+    placeholder: 4000
+    title: Port
+    default: 4000
+    value:
+  - key: secretkey
+    charlimit: 32
+    placeholder: a secret key
+    title: Secret Key
+    default: change this key
+    value:
+  - key: postgresdb
+    charlimit: 32
+    placeholder: database name
+    title: Database Name
+    default: lockerdatabase
+    value:
+  - key: postgresuser
+    charlimit: 32
+    placeholder: database user
+    title: Database User
+    default: postgres
+    value:
+  - key: postgrespass
+    charlimit: 32
+    placeholder: user password
+    title: Database User Password
+    default: postgres
+    value:
+assignments:
+  - service: auth
+    name: WEB_SECRET_KEY
+    format: "%s"
+    inputs:
+      - secretkey
+  - service: compose
+    name: PORT
+    format: "%s"
+    inputs:
+      - port
+  - service: mcpo
+    name: DATABASE_URL
+    format: "postgresql://%s:%s@postgres/%s"
+    inputs:
+      - postgresuser
+      - postgrespass
+      - postgresdb
+  - service: mcpo
+    name: TIMEZONE
+    format: America/Chicago
+  - service: nginx
+    name: DOMAIN_NAME
+    format: "%s"
+    inputs:
+      - host
+  - service: openwebui
+    name: DATABASE_URL
+    format: "postgresql://%s:%s@postgres/%s"
+    inputs:
+      - postgresuser
+      - postgrespass
+      - postgresdb
+  - service: openwebui
+    name: PGVECTOR_DB_URL
+    format: "postgresql://%s:%s@postgres/%s"
+    inputs:
+      - postgresuser
+      - postgrespass
+      - postgresdb
+  - service: openwebui
+    name: WEBUI_URL
+    format: "http://%s"
+    inputs:
+      - host
+  - service: openwebui
+    name: WEBUI_SECRET_KEY
+    format: "%s"
+  - service: searxng
+    name: SEARXNG_BASE_URL
+    format: "http://%s/searxng"
+    inputs:
+      - host
+  - service: postgres
+    name: POSTGRES_DB
+    format: "%s"
+    inputs:
+      - postgresdb
+  - service: postgres
+    name: POSTGRES_PASSWORD
+    format: "%s"
+    inputs:
+      - postgrespass
+  - service: postgres
+    name: POSTGRES_USER
+    format: "%s"
+    inputs:
+      - postgresuser
+  - service: searxng
+    name: SEARXNG_REDIS_URL
+    format: "redis://redis:6379/1"
+  - service: searxng
+    name: SEARXNG_SECRET
+    format: "%s"
