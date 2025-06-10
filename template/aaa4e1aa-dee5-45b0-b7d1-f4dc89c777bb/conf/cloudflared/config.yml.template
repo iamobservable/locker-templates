@@ -1,0 +1,2 @@
+tunnel: {{.TunnelId}}
+credentials-file: /home/nonroot/.cloudflared/{{.TunnelId}}.json

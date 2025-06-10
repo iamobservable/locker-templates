@@ -1,0 +1,100 @@
+services:
+  chatterbox:
+    image: chatterbox
+    # build:
+    #   context: ./chatterbox/server
+    #   dockerfile: Dockerfile
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    env_file: env/chatterbox.env
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
+    healthcheck:
+      interval: 30s
+      retries: 5
+      start_period: 10s
+      test: curl --fail http://localhost:8004 || exit 1
+      timeout: 3s
+    # ports:
+    #   - "8004:8004"
+    volumes:
+      - chatterbox:/app
+    restart: unless-stopped
+
+  nginx:
+    depends_on:
+      - watchtower
+    env_file: env/nginx.env
+    healthcheck:
+      interval: 30s
+      retries: 5
+      start_period: 5s
+      test: curl --fail http://localhost/ || exit 1
+      timeout: 3s
+    image: nginx:latest
+    ports:
+      - ${PORT:-4000}:80
+    restart: unless-stopped
+    volumes:
+      - ./conf/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
+      - ./conf/nginx/nginx.conf:/etc/nginx/nginx.conf
+
+  ollama:
+    depends_on:
+      - watchtower
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    env_file: env/ollama.env
+    healthcheck:
+      interval: 30s
+      retries: 5
+      start_period: 10s
+      test: curl --fail http://localhost:11434/api/version || exit 1
+      timeout: 3s
+    image: ollama/ollama:latest
+    post_start:
+      - command: "sh -c ollama pull qwen3:4b"
+    restart: unless-stopped
+    volumes:
+      - ollama:/root/.ollama
+
+  postgres:
+    depends_on:
+      - watchtower
+    env_file: env/postgres.env
+    healthcheck:
+      interval: 30s
+      retries: 5
+      start_period: 20s
+      test: ["CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
+      timeout: 5s
+    image: pgvector/pgvector:pg15
+    restart: unless-stopped
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+  watchtower:
+    command: --cleanup --debug --interval 300
+    env_file: env/watchtower.env
+    image: containrrr/watchtower
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+volumes:
+  chatterbox:
+    external: false
+  ollama:
+    external: false
+  postgres:
+    external: false

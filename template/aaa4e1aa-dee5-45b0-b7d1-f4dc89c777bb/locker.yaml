@@ -1,0 +1,59 @@
+id: aaa4e1aa-dee5-45b0-b7d1-f4dc89c777bb
+headline: Simple example locker environment with Ollama, Postgres, Chatterbox, and Watchtower
+inputs:
+  - key: host
+    charlimit: 16
+    placeholder: localhost
+    title: Host
+    default: localhost
+    value:
+  - key: port
+    charlimit: 5
+    placeholder: 4000
+    title: Port
+    default: 4000
+    value:
+  - key: postgresdb
+    charlimit: 32
+    placeholder: database name
+    title: Database Name
+    default: lockerdatabase
+    value:
+  - key: postgresuser
+    charlimit: 32
+    placeholder: database user
+    title: Database User
+    default: postgres
+    value:
+  - key: postgrespass
+    charlimit: 32
+    placeholder: user password
+    title: Database User Password
+    default: postgres
+    value:
+assignments:
+  - service: compose
+    name: PORT
+    format: "%s"
+    inputs:
+      - port
+  - service: nginx
+    name: DOMAIN_NAME
+    format: "%s"
+    inputs:
+      - host
+  - service: postgres
+    name: POSTGRES_DB
+    format: "%s"
+    inputs:
+      - postgresdb
+  - service: postgres
+    name: POSTGRES_PASSWORD
+    format: "%s"
+    inputs:
+      - postgrespass
+  - service: postgres
+    name: POSTGRES_USER
+    format: "%s"
+    inputs:
+      - postgresuser
