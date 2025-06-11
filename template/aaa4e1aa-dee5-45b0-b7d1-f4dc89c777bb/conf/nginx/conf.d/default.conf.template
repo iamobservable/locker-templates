@@ -21,7 +21,7 @@ server {
 
     client_max_body_size 20M;
 
-    proxy_pass http://$1Upstream;
+    proxy_pass http://chatterboxUpstream/;
   }
 }
 
