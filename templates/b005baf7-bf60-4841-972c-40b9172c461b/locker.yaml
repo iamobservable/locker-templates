@@ -26,7 +26,7 @@ inputs:
     charlimit: 32
     placeholder: database name
     title: Database Name
-    default: lockerdatabase
+    default: owui
     value:
   - key: postgresuser
     charlimit: 32
