@@ -1,7 +1,7 @@
 services:
   auth:
     env_file: env/auth.env
-    image: ghcr.io/iamobservable/owui-jwt-auth-validator:0.1.0
+    image: ghcr.io/iamobservable/jwt-auth-validator:0.1.0
     labels:
       - "com.centurylinklabs.watchtower.enable=false"
     restart: unless-stopped

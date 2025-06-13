@@ -42,7 +42,7 @@ inputs:
     value:
 assignments:
   - service: auth
-    name: WEB_SECRET_KEY
+    name: JWT_SECRET
     format: "%s"
     inputs:
       - secretkey
