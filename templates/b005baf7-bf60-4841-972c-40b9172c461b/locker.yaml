@@ -51,6 +51,9 @@ assignments:
     format: "%s"
     inputs:
       - port
+  - service: edgetts
+    name: DEFAULT_VOICE
+    format: "en-AU-NatashaNeural"
   - service: mcpo
     name: DATABASE_URL
     format: "postgresql://%s:%s@postgres/%s"
