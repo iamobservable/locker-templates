@@ -1,4 +1,7 @@
 id: b005baf7-bf60-4841-972c-40b9172c461b
+title: Open-WebUI (OWUI) starter system with sane defaults
+description: The Open WebUI Starter project is meant to provide a quick template for setting up Open WebUI. More information can be found about configurations on the Open WebUI Docs or the Gitub repository.
+url: "https://github.com/iamobservable/open-webui-starter"
 headline: Let's build a new environment! Provide either localhost or the ip address for this computer.
 inputs:
   - key: host

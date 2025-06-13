@@ -1,5 +1,7 @@
 id: aaa4e1aa-dee5-45b0-b7d1-f4dc89c777bb
-headline: Simple example locker environment with Ollama, Postgres, Chatterbox, and Watchtower
+title: Web interface showing Chatterbox example
+description: Pulls together a system with Chatterbox to showcase how local voice can be done; has voice cloning built in.
+headline: Simple example locker environment with Nginx, Ollama, Chatterbox, and Watchtower
 inputs:
   - key: host
     charlimit: 16
@@ -13,24 +15,6 @@ inputs:
     title: Port
     default: 4000
     value:
-  - key: postgresdb
-    charlimit: 32
-    placeholder: database name
-    title: Database Name
-    default: lockerdatabase
-    value:
-  - key: postgresuser
-    charlimit: 32
-    placeholder: database user
-    title: Database User
-    default: postgres
-    value:
-  - key: postgrespass
-    charlimit: 32
-    placeholder: user password
-    title: Database User Password
-    default: postgres
-    value:
 assignments:
   - service: compose
     name: PORT
@@ -42,18 +26,3 @@ assignments:
     format: "%s"
     inputs:
       - host
-  - service: postgres
-    name: POSTGRES_DB
-    format: "%s"
-    inputs:
-      - postgresdb
-  - service: postgres
-    name: POSTGRES_PASSWORD
-    format: "%s"
-    inputs:
-      - postgrespass
-  - service: postgres
-    name: POSTGRES_USER
-    format: "%s"
-    inputs:
-      - postgresuser
