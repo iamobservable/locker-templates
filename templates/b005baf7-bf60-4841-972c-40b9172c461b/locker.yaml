@@ -91,6 +91,8 @@ assignments:
   - service: openwebui
     name: WEBUI_SECRET_KEY
     format: "%s"
+    inputs:
+      - secretkey
   - service: searxng
     name: SEARXNG_BASE_URL
     format: "http://%s/searxng"
