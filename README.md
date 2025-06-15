@@ -1,52 +1,38 @@
-## Locker File: Open WebUI Starter
-Author: IamObservable, MaxFrenzy
+## OpenWebUI Complete Locker Template (Nvidia GPU)
+Creator: IamObservable, MaxFrenzy
+
 Created: 06-05-2025
-### Locker Launch Command
+
+### Locker Create Command
 
 ```
-locker --build b0034-2323-2323-3344-29823
+locker --create b005baf7-bf60-4841-972c-40b9172c461b
 ```
 
 ### Locker Summary
 
-Spin up your own professional, pre-configured AI stack on your own subdomain—faster than you can say "Ollama!"  
-This Locker builds and configures a complete, modular AI environment around [Open WebUI](https://www.openwebui.com), a powerful, self-hosted interface for working with local language models.
+This Locker builds and configures a complete, modular AI environment around [Open WebUI](https://www.openwebui.com), a powerful, self-hosted interface for working with LLMs.
 
-Included is a full suite of production-ready components:
+Included is a full suite of production-ready services built around OWUI:
 
-- Secure public access with Cloudflare Zero Trust Tunnels
+- JWT authentication provided by Locker
 - A reverse-proxied, load-balanced web server (Nginx)
 - High-speed caching (Redis), vector search (PgVector), and a Postgres database
-- Private web search with SearxNG
+- Local web search instance with SearxNG
 - Document extraction via Tika and Docling
 - Natural text-to-speech using Edge TTS
 - Tool and API extensibility via MCP
 - Automatic container updates with Watchtower
 
-It’s the fastest way to go from an empty terminal to a full-featured private AI assistant you can access from anywhere.
 
 **Requirements:**
-- A domain name (e.g. yourdomain.com)
-- DNS for your domain pointed at [Cloudflare](https://www.cloudflare.com) (Free)
-- NVIDIA Gpu?
+- Windows/Linux (WSL)
+- Docker
+- NVIDIA GPU
 
-**Time Check:**
-If you're already using Cloudflare and have your domain pointed to it, setup time from Zero Trust Tunnel creation to chatting with your AI is **under 30 minutes**. All the complex setup has been automated for you. You’re stepping into a system refined through months of configuring, testing, and learning—delivered in minutes.
 
-### What’s Inside the Locker?
+### Inside the Locker
 
-#### [**Cloudflare**](https://www.cloudflare.com/)
-
-Cloudflare provides a free way to create a secure tunnel to make your OpenWebUI instance available to you from outside your local network. In other words, this connects your domain name to your local machine running OpenWebUI in a safe way that doesn't expose the rest of your network.
-
-This allows you to:
-
-- Access your AI server from anywhere you have an internet connection
-- Invite users or collaborators without dealing with VPNs or port forwarding
-- Protect your home network while giving controlled public access to OpenWebUI
-
-Cloudflare’s Zero Trust Tunnel makes this possible on their **free plan**, and it integrates cleanly into the stack with minimal configuration. It’s fast, secure, and battle-tested. 
-  
 #### [**Docling**](https://github.com/docling-project/docling-serve)
 
 Docling is a document processing library designed to transform a wide range of file formats—including PDFs, Word documents, spreadsheets, HTML, and images—into structured data such as JSON or Markdown.
@@ -88,7 +74,7 @@ You can simply talk to your AI and:
 This project includes two starter tools:
 
 - **Time Tool**: Essential for any system that wants accurate responses tied to current date/time.
-- **Postgres Query Tool**: Lets you explore your database by asking questions like, "What tables are available?" or "What’s in the logs table?"
+- **Postgres Query Tool**: Lets you explore your database by asking questions like, "What tables are available?" or "What’s in the user table?"
 
 Why it's included:
 
@@ -225,9 +211,4 @@ Why it's included:
 
 Watchtower makes maintaining your stack easy and efficient—perfect for both development and long-running production setups. It comes pre-configured to send notifications to your discord.
 
-### Setup Notes
-
-If you don’t yet have a domain, [Cloudflare Registrar](https://www.cloudflare.com/products/registrar/) offers domains at wholesale cost (no markup). They also include DNS services for free.
-
-If your domain is registered elsewhere (e.g., GoDaddy), you’ll need to update your nameservers. Once your domain is added to Cloudflare, they’ll show you the new nameservers to enter (e.g., `johnny.ns.cloudflare.com`, `meg.ns.cloudflare.com`). Update your registrar’s settings to point there and you're done.
 
