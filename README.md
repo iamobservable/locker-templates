@@ -1,214 +1,254 @@
-## OpenWebUI Complete Locker Template (Nvidia GPU)
-Creator: IamObservable, MaxFrenzy
+# 🧱 OpenWebUI (OWUI) - Complete Locker (Nvidia GPU)
 
-Created: 06-05-2025
+**Template ID:** b005baf7-bf60-4841-972c-40b9172c461b  
+**Created by:** Iamobservable, MaxFrenzy  
+**Created on:** June 2025  
 
-### Locker Create Command
+**Locker Create Command:**
+
+```bash
+locker create b005baf7-bf60-4841-972c-40b9172c461b
+```
+
+
+## 📚 Table of Contents
+
+1. [Summary](#summary)
+2. [Who Is It For?](#who-is-it-for)
+3. [Use Cases](#use-cases)
+4. [Included Services Overview](#included-services-overview)
+5. [Interface & Feature Previews](#interface--feature-previews)
+6. [Requirements](#requirements)
+7. [Installation](#installation)
+8. [Post-Installation Setup](#post-installation-setup)
+9. [Learn More](#learn-more)
+10. [Project Status](#project-status)
+
+
+
+## Summary
+
+This Locker template provides you with a full local AI environment built around OpenWebUI, an extensible, feature-rich, and user-friendly self-hosted AI platform designed to operate entirely offline. The template serves to stand-up the environment around OWUI and provide a privacy focused and free alternative to cloud-based AI platforms like Chat-GPT or Claude. It leverages features within OpenWebUI and provides sane defaults intended to accelerate your experience setting up and using local AI tools. Specifically, intent was directed into providing services for authentication, enhanced file support and document parsing, improved text-to-speech voice options, local web search, tool access with MCP, and more. Built for users who want complete control over their tools, this stack is privacy-respecting, fully self-hosted, and designed to be extended.
+
+
+
+## Who Is It For?
+
+* Anyone looking for a locally hosted alternative to Chat-GPT, Claude, or similar AI tools
+* Developers working around OpenWebUI or Ollama
+* People looking for more control over their data and AI functionality
+* Anyone looking to jump start or enhance their OpenWebUI setup and usage experience
+* Builders exploring local knowledge stores, voice, web search, or multi-modal workflows
+
+
+
+## Use Cases
+
+* Run local LLMs with OpenWebUI and Ollama
+* Generate reports and ask questions using your PDFs, Word docs, spreadsheets and other files (via Tika & Docling)
+* Talk to your assistant with more natural-sounding voices (EdgeTTS)
+* Query data from the web and integrate results into chats (SearxNG)
+* Explore MCP tools easily - try out the examples to add time and database knowledge to your AI (MCPO Server)
+* Maintain memory, knowledge bases, chat history and document embeddings (Postgres + PgVector)
+
+
+
+## Included Services Overview
+
+| Service | Purpose |
+|--------|---------|
+| [**Auth**](https://github.com/iamobservable/jwt-auth-validator) | JWT validation - gatekeeping for web endpoints |
+| [**Docling**](https://github.com/docling-project/docling-serve) | Enhanced document handling for PDFs and other formats |
+| [**Edge TTS**](https://github.com/rany2/edge-tts) | Text-to-speech using natural sounding voices |
+| [**MCP Server**](https://modelcontextprotocol.io/introduction) | Integrates tools (e.g., time, database information) via API |
+| [**Nginx**](https://nginx.org/) | Reverse proxy for routing traffic and load balancing |
+| [**Ollama**](https://ollama.com/) | Local model runtime for accessing open-source AI models |
+| [**OpenWebUI**](https://openwebui.com/) | Main interface for AI chat & tool usage |
+| [**PgVector**](https://github.com/pgvector/pgvector) | Embedding store for RAG and storage queries |
+| [**Postgres**](https://www.postgresql.org/) | Primary database for persistence |
+| [**Redis**](https://redis.io/) | Cache and index store for SearxNG |
+| [**SearxNG**](https://docs.searxng.org/) | Local meta search engine with scraping |
+| [**Tika**](https://tika.apache.org/) | Document parser for data extraction |
+| [**Watchtower**](https://github.com/containrrr/watchtower) | Auto-updates containers silently and can send notifications to Discord |
+
+
+## Interface & Feature Previews
+If you're familiar with Chat-GPT, the OpenWebUI interface is incredibly similar and operates in much the same way. Below you can see a side-by-side of the OWUI web inteface next to Chat-GPT. Access to adding files, initiating a web search, starting a voice call, and entering text can all be accessed in a familiar fashion.
+
+![owui-complete-locker-chat-gpt-comparison2](https://github.com/user-attachments/assets/1af1a8a4-88b1-48a7-bf41-ade115ab5d87)
+
+The OpenWebUI Complete Locker adds a personal instance of Searxng, a local meta search engine for use as a standalone web search utility or to enhance AI models with web info. 
+
+![owui-complete-locker-searxng-landing](https://github.com/user-attachments/assets/e2074aaf-3393-49d9-83f8-6403463186c2)
+
+
+*Additional screenshots of web search, document parsing, chat interface, and voice conversation coming soon.*
+
+
+## Requirements
+
+* Windows 10/11 (with [WSL](https://learn.microsoft.com/en-us/windows/wsl/) installed) or Linux
+* [Docker](https://www.locker.com/) - Docker Desktop recommended. If you don't have Docker installed, Docker Desktop will install the WSL environment for you on Windows installations.
+* NVIDIA GPU - The OpenWebUI Complete Locker template has been configured to use Nvidia GPUs. 
+* [Locker](https://github.com/iamobservable/locker)
+
+
+
+## Installation
+
+Before beginning installation, confirm that:
+
+* Docker is installed
+* WSL is installed (if using Windows)
+* Locker is installed
+
+### 1. Run the create command:
+
+```bash
+locker create b005baf7-bf60-4841-972c-40b9172c461b
+```
+
+You’ll be prompted to fill:
+
+| Field             | Example     | Description                                        |
+| ----------------- | ----------- | -------------------------------------------------- |
+| Host              | `localhost` | Address where the stack will run - localhost or IP |
+| Port              | `4000`      | Web port for accessing OpenWebUI                   |
+| Secret Key        | `secretkey` | A unique key for authentication across services    |
+| Database Name     | `owui`      | Postgres DB name                                   |
+| Database User     | `postgres`  | Postgres user                                      |
+| Database Password | `postgres`  | Postgres password                                  |
+
+![owui-complete-locker-install-linux](https://github.com/user-attachments/assets/71084e72-fd72-468d-9042-2e4a73530482)
+
+After the environment has been configured, you'll be returned to the command line.
+
+![owui-complete-locker-post-install-screen](https://github.com/user-attachments/assets/0302e543-1882-49d2-a961-7ac1109f4ad1)
+
+
+### 2. Run Docker Compose Up
+
+```bash
+docker compose up -d
+```
+
+![owui-complete-locker-docker-compose-up](https://github.com/user-attachments/assets/05de2769-7756-4955-86f1-ef3cbef198f9)
+
+After you run the command, the output will show the containers being created and started.
+
+![owui-complete-locker-installation-complete](https://github.com/user-attachments/assets/b8971923-a15b-4a35-a3ef-0b4734d47228)
+
+
+### 3. Verify in Docker Desktop
+
+Open Docker Desktop to confirm all containers are up and running.
+
+![owui-complete-locker-docker-desktop-containers](https://github.com/user-attachments/assets/9c95e010-c391-45f4-b94e-b8ed8ed29503)
+
+
+### 4. Launch OpenWebUI
+
+Open a browser and visit `localhost:4000` (or your custom IP/port).
+
+![owui-landing-page](https://github.com/user-attachments/assets/e7fa5c5d-fbdf-4b6f-af39-29b4f5c63076)
+
+
+### 5. Create Admin Credentials
+
+After clicking "get started", OpenWebUI will prompt you to create your administrator account. Enter appropriate user info and proceed.
+
+![owui-admin-setup](https://github.com/user-attachments/assets/b6032ddd-1f89-40c1-8942-ab6eb8895758)
+
+
+### 6. Start a Chat
+
+Send a message! By default, [Qwen3:0.6B](https://ollama.com/library/qwen3:0.6b) is pulled from Ollama as part of this setup. If the pull was successful, you should be able to begin chatting. 
+
+![owui-complete-locker-hello-qwen3](https://github.com/user-attachments/assets/b53a98c1-0273-4738-99bf-b18cfae29c5b)
+
+Additional models can be pulled from within the Admin panel of the OWUI interface under `models` or by using Ollama directly.
+
+![owui-admin-settings-models](https://github.com/user-attachments/assets/540a1833-8442-402f-a606-1e9a945b5f33)
+ 
+A [list of models](https://ollama.com/search) is available on Ollama's website. By default, this Locker includes access to [**Qwen3-0.6B**](https://ollama.com/library/qwen3:0.6b), a reasoning model known for showing its thought process in OpenWebUI. It also interacts intuitively with tools and external modules. The model provided here is meant as a **starting point**, not a definitive answer. The world of models is vast—each with unique strengths, system requirements, and quirks when used within OpenWebUI.
+
+For more information on accessing models:
+
+- [OpenWebUI documentation on models](https://docs.openwebui.com/features/workspace/models)
+- [Ollama documentation from GitHub](https://github.com/ollama/ollama)
+
+Continue on to the post-installation setup below for final configuration steps.
+
+## Post-Installation Setup
+
+### **MCP Servers**
+
+Model Context Protocol (MCP) is a configurable set of tools, resources, prompts, samplings, and roots. They provide a structured way to expose local functionality to the LLM. Examples are providing access to the local file system, searching the internet, interacting with git or github, and much more.
+
+#### **Manual entry (MUST COMPLETE)**
+
+The configuration for tools currently requires a manual step to complete. At this time, we are unable to automate this portion of the setup. In order to use the two default tools, it is required to add them manually. **They will NOT** automatically load using the environment variable TOOL\_SERVER\_CONNECTIONS within the openwebui.env file, despite being present.
+
+Add the following two URLs using the Settings -> Tools -> General interface. This can also be set in the Admin Settings as well.
+
+*Note - the default postgres tool is configured to access your OpenWebUI postgres database. While this is read-only, the tool server that is defined allows any user with the credentials added to the `env/mcpo.env`to access the database tables. If anything should be restricted, make sure to do so ahead of time.*
 
 ```
-locker --create b005baf7-bf60-4841-972c-40b9172c461b
+http://mcposerver:8000/time
 ```
 
-### Locker Summary
+```
+http://mcposerver:8000/postgres
+```
+![owui-settings-tools](https://github.com/user-attachments/assets/3ef404b1-6a6c-4262-9036-ff48d971db91)
 
-This Locker builds and configures a complete, modular AI environment around [Open WebUI](https://www.openwebui.com), a powerful, self-hosted interface for working with LLMs.
+![owui-settings-tools-add-connection](https://github.com/user-attachments/assets/cfb6c255-7251-4577-8878-7567dad6208c)
 
-Included is a full suite of production-ready services built around OWUI:
 
-- JWT authentication provided by Locker
-- A reverse-proxied, load-balanced web server (Nginx)
-- High-speed caching (Redis), vector search (PgVector), and a Postgres database
-- Local web search instance with SearxNG
-- Document extraction via Tika and Docling
-- Natural text-to-speech using Edge TTS
-- Tool and API extensibility via MCP
-- Automatic container updates with Watchtower
+**Initial configuration**
 
+Configurations for MCP services can be found in your install directory under `conf/mcpo/config.json`. Links below in the table describe the default configuration.
 
-**Requirements:**
-- Windows/Linux (WSL)
-- Docker
-- NVIDIA GPU
+*Note - the time tool is configured using uvx instead of directly with the python binary, as the repository describes.*
 
+You may expand on the tools available to your interface. A few examples are listed below.
 
-### Inside the Locker
+| Tool                                                                               | Description                                                                                                                                             | Configuration                                                                                                              |
+| ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| [time](https://github.com/modelcontextprotocol/servers/tree/main/src/time)         | Provides current time values for configured timezone | config/mcpo/config.json                                                                                                    |
+| [postgres](https://github.com/modelcontextprotocol/servers/tree/main/src/postgres) | Provides SQL querying for the configured database (defaults to OpenWebUI)                                                                               | config/mcpo/config.json |
 
-#### [**Docling**](https://github.com/docling-project/docling-serve)
+#### **MCP Server Discovery**
 
-Docling is a document processing library designed to transform a wide range of file formats—including PDFs, Word documents, spreadsheets, HTML, and images—into structured data such as JSON or Markdown.
+If you are looking for tools to add, the following three MCP Server sources are a great place to look. It may even inspire you to create your own over time!
 
-Within OpenWebUI, Docling is one of several available methods (in addition to the default content extraction engine and others like Tika) for robust file handling and content extraction. It's especially helpful when working with diverse or complex file types that need to be embedded, summarized, or queried using LLMs.
+* [Model Context Protocol servers](https://github.com/modelcontextprotocol/servers?tab=readme-ov-file#model-context-protocol-servers)
+* [Awesome MCP Servers](https://mcpservers.org/)
+* [Smithery](https://smithery.ai/)
 
-Why it's included:
+---
 
-- Offers flexible extraction beyond basic plaintext
-- Supports multiple file types, even complex documents
-- Enhances OpenWebUI’s native file handling features
+## Learn More
 
-In short, it’s a powerful behind-the-scenes upgrade to how OpenWebUI deals with your documents.
+To learn more about the services included in this Locker template, explore the links below.
 
-#### [**Edge TTS**](https://github.com/rany2/edge-tts)
+* **[Cloudflare](https://www.cloudflare.com/)**: Platform providing anonymous proxying and SSL certificates
+* **[Docling](https://github.com/docling-project/docling-serve)**: Simplifies document processing, parsing diverse formats — including advanced PDF understanding — and providing seamless integrations with the gen AI ecosystem (created by IBM)
+* **[Edge TTS](https://github.com/rany2/edge-tts)**: Python module that uses Microsoft Edge's online text-to-speech service
+* **[MCP Server](https://modelcontextprotocol.io/introduction)**: Open protocol that standardizes how applications provide context to LLMs
+* **[Nginx](https://nginx.org/)**: Web server, reverse proxy, load balancer, mail proxy, and HTTP cache
+* **[Ollama](https://ollama.com/)**: Local service API serving open source large language models
+* **[OpenWebUI](https://openwebui.com/)**: Open WebUI is an extensible, feature-rich, and user-friendly self-hosted AI platform designed to operate entirely offline
+* **[PostgreSQL](https://www.postgresql.org/)** / **[PgVector](https://github.com/pgvector/pgvector)**: A free and open-source relational database management system (RDBMS) with vector capabilities for embeddings
+* **[Redis](https://redis.io/)**: In-memory data structure store used as a database, cache, and message broker
+* **[SearxNG](https://docs.searxng.org/)**: Free internet metasearch engine used for tool integration with OpenWebUI
+* **[Tika](https://tika.apache.org/)**: Toolkit for extracting metadata and text from various file formats
+* **[Watchtower](https://github.com/containrrr/watchtower)**: Automated Docker container for updating container images automatically
 
-This text-to-speech component provides access to Microsoft Edge's online TTS service—completely free. It greatly enhances OpenWebUI’s default voice capabilities by offering more expressive, natural-sounding options.
+To learn more about Locker, check out the project on GitHub:
 
-You can preview available voices on [this playground](https://tts.travisvn.com/) and use them by simply copying the voice name into your OpenWebUI settings.
+**[Locker](https://github.com/iamobservable/locker)** — A command line tool for building pre-configured/curated AI environments.
 
-Why it's included:
+## Project Status
 
-- Significantly higher-quality voice output vs the default
-- Dozens of voices available across multiple languages and tones
-- No subscription or API key needed—it just works
-
-Edge TTS provides a polished, more human-like AI assistant experience with minimal setup. 
-  
-#### [**MCP Server**](https://modelcontextprotocol.io/introduction)
-
-The OpenWebUI MCP server unlocks additional functionality and takes advantage of a new open protocol that standardizes how applications provide context to LLMs. In practical language, it opens up an entire world of new tools that can be used easily—without needing to understand APIs, endpoints, or schemas.
-
-You can simply talk to your AI and:
-
-- Get the current time (models don’t know it)
-- Ask questions about your Postgres database
-- Use other connected tools in natural language
-
-This project includes two starter tools:
-
-- **Time Tool**: Essential for any system that wants accurate responses tied to current date/time.
-- **Postgres Query Tool**: Lets you explore your database by asking questions like, "What tables are available?" or "What’s in the user table?"
-
-Why it's included:
-
-- Extends OpenWebUI’s capabilities with modular, plug-and-play tools
-- Encourages a more conversational, assistant-like experience
-- Makes AI truly useful for real-world tasks and automation
-
-MCP turns your local LLM into a flexible, evolving assistant that can grow with your needs without code. 
-  
-#### [**Nginx**](https://nginx.org/)
-
-Nginx is a high-performance, open-source web server known for its ability to handle a large number of concurrent connections efficiently. In this stack, Nginx acts as a:
-
-- **Reverse Proxy**: It directs incoming traffic to the right services behind the scenes.
-- **Load Balancer**: It ensures traffic is evenly distributed across services for better reliability.
-- **Caching Layer**: It boosts performance and reduces strain on backend systems.
-
-Why it's included:
-
-- Professional-grade traffic management out of the box
-- Flexible enough to scale with growing usage
-- Well-supported and widely adopted in the industry
-
-In short, it’s the backbone of secure, performant access to your AI stack over the web. 
-  
-#### [**Ollama**](https://ollama.com/)
-
-Ollama is a groundbreaking platform that democratizes access to large language models (LLMs) by enabling users to run them locally on their machines.
-
-A [list of models](https://ollama.com/search) is available on Ollama's website. By default, this Locker includes access to **Qwen3-0.6B**, a reasoning model known for showing its thought process in OpenWebUI. It also interacts intuitively with tools and external modules.
-
-Why it's included:
-
-- Local, offline access to powerful open-source LLMs
-- More privacy and control compared to cloud-based models
-- Easy model swapping—experiment, compare, and upgrade as needed
-
-The model provided here is meant as a **starting point**, not a definitive answer. The world of models is vast—each with unique strengths, system requirements, and quirks when used within OpenWebUI.
-
-We recommend:
-
-- Researching the models that interest you
-- Exploring community feedback and benchmarks
-- Matching your hardware capabilities to model demands
-
-Ollama makes your AI environment modular, private, personal, and fast—because it's running right on your machine. 
-  
-#### [**OpenWebUI**](https://openwebui.com/)
-
-Open WebUI is an extensible, feature-rich, and user-friendly self-hosted AI platform designed to operate entirely offline. It’s the core interface of this stack and acts as the control center for interacting with language models and tools.
-
-OpenWebUI offers far more than just a chat interface:
-
-- Built-in support for local and remote LLMs
-- Natural language interfaces to tools and APIs
-- Document upload and summarization
-- Role-based access, user management, and sessions
-- Embedding and retrieval with vector stores like pgvector
-- Modular plugin system and extensible UI
-
-Why it’s included:
-
-- It’s the visual and functional foundation of the Locker
-- A fast, modern interface with constant updates and a great developer community
-- Designed for local-first, privacy-respecting AI deployment
-
-We recommend exploring their [full feature list](https://docs.openwebui.com/features/) to understand everything this platform enables. You’ll quickly see why this stack was built around it. 
-  
-#### [**PostgreSQL + PgVector**](https://www.postgresql.org/)
-
-PostgreSQL is a powerful, production-grade relational database—and when combined with [PgVector](https://github.com/pgvector/pgvector), it becomes a foundation for working with embeddings and vector search inside OpenWebUI.
-
-This stack replaces the default SQLite backend with Postgres for several reasons:
-
-- Better performance under load
-- Increased reliability and scalability
-- Support for advanced features like RAG (Retrieval-Augmented Generation) and knowledge base embedding
-
-Why it’s included:
-
-- Enables long-term memory features within OpenWebUI
-- Supports richer AI workflows like semantic search and retrieval
-- Offers industry-standard data integrity and structure
-
-As your projects grow more complex or you begin storing more documents, chat logs, and web data, this upgrade becomes essential for both speed and flexibility. 
-  
-#### [**Redis**](https://redis.io/)
-
-Redis is famous for being an extremely fast in-memory data store. Its speed comes from the fact that it serves all data directly from memory, making it perfect for caching, queuing, and real-time analytics.
-
-Why it's included:
-
-- Boosts performance for time-sensitive operations
-- Commonly used for caching AI responses or tool output
-- Durable with optional disk persistence
-
-It’s a key component in many high-performance stacks, and here it supports OpenWebUI’s backend needs for speed and reliability. You can even access its web UI at `yoursite.com/redis` to monitor and explore its behavior in real time.
-  
-#### [**SearxNG**](https://docs.searxng.org/)
-
-SearxNG is a free, self-hosted metasearch engine that integrates with OpenWebUI’s web search functionality. It lets you submit queries from your own local instance to a curated set of public search engines, returning results without the typical tracking, ads, or profiling found in browser-based search.
-
-Why it’s included:
-
-- **Privacy-conscious**: Queries are sent from your local SearxNG instance to search engines, avoiding tracking and fingerprinting tied to your browser or identity
-- **Performance**: Local querying means faster and more reliable results
-- **Customization**: You can choose which engines it pulls from and how it filters results
-
-While it powers web search inside OpenWebUI, it can also act as a standalone search engine for your browser—just point it to `yoursite.com/searxng` and enjoy a private search experience with results pulled from across the internet. 
-
-#### [**Tika**](https://tika.apache.org/)
-
-Apache Tika is a toolkit that detects and extracts metadata and text from over a thousand different file types, including PDFs, Word documents, spreadsheets, HTML, and more.
-
-In this stack, Tika serves as an alternative or supplement to Docling and OpenWebUI’s default document parser.
-
-Why it’s included:
-
-- **Broad compatibility** with obscure or edge-case formats
-- **Reliable extraction** even from poorly structured or embedded content
-- **Multiple engines** provide fallback options—so one failure doesn’t block your workflow
-
-Tika increases resilience and improves document processing accuracy, especially in environments dealing with varied or unstructured data. 
-  
-#### [**Watchtower**](https://github.com/containrrr/watchtower)
-
-Watchtower is an automated Docker container updater. It monitors your running containers and checks if there are new versions of the images they’re based on. If an update is found, it will gracefully stop the old container and start the new one.
-
-Why it's included:
-
-- **Hands-free updates**: Keep OpenWebUI and its supporting tools fresh without manual intervention
-- **Easy to configure**: Set update frequency, target containers, and send notifications
-- **Production-safe**: Restarts containers one at a time to avoid downtime
-
-Watchtower makes maintaining your stack easy and efficient—perfect for both development and long-running production setups. It comes pre-configured to send notifications to your discord.
-
-
+This README and Locker template are provided as-is and represent a complete, functional starting point for WebUI experimentation. While future updates may be limited, issues or suggestions are welcome via GitHub.
