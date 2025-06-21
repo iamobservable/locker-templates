@@ -95,9 +95,10 @@ assignments:
       - secretkey
   - service: searxng
     name: SEARXNG_BASE_URL
-    format: "http://%s/searxng"
+    format: "http://%s:%s/searxng"
     inputs:
       - host
+      - port
   - service: postgres
     name: POSTGRES_DB
     format: "%s"
